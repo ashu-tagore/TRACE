@@ -1,0 +1,48 @@
+data:
+  tickers: [XLK, XLF, XLE, XLV, XLI, XLC, XLY, XLP, XLU]
+  start_date: "2019-01-01"
+  end_date: "today"
+  seq_len: 30
+  stride: 1
+
+training:
+  exclude_periods:
+    - {start: "2020-02-15", end: "2020-06-30", reason: "COVID crash"}
+    - {start: "2022-01-01", end: "2022-12-31", reason: "Fed rate-hike bear market"}
+    - {start: "2023-03-08", end: "2023-03-20", reason: "SVB banking crisis"}
+  vol_threshold_sigma: 2.0
+  corr_drift_threshold_sigma: 2.0
+  corr_stability_window: 30
+  corr_current_window: 5
+
+model:
+  hidden_size: 128
+  num_layers: 2
+  latent_dim: 32
+  dropout: 0.2
+  beta_max: 1.0
+  beta_anneal_epochs: 10
+
+training_loop:
+  epochs: 100
+  batch_size: 64
+  learning_rate: 0.001
+  early_stopping_patience: 10
+  val_split: 0.15
+
+cost_engine:
+  vol_rolling_window: 20
+  corr_rolling_window: 30
+  corr_current_window: 5
+  persistence_decay: 0.9
+
+alerting:
+  trace_score_threshold: 0.85
+  psi_feature_breach_count: 10
+  email_recipient: "portfolio.manager@firm.com"
+  smtp_host: "smtp.gmail.com"
+  smtp_port: 587
+
+mlflow:
+  experiment_name: "TRACE"
+  model_name: "TRACE-LSTMVAE"

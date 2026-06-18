@@ -1,0 +1,35 @@
+data/raw/
+data/processed/
+logs/
+mlruns/
+__pycache__/
+*.pyc
+.env
+.venv/
+*.egg-info/
+.DS_Store
+frontend/node_modules/
+
+# test artifacts
+test_trace.db
+.pytest_cache/
+
+# lint/format caches
+.ruff_cache/
+
+# notebook checkpoints
+.ipynb_checkpoints/
+
+# build artifacts
+dist/
+build/
+
+# editor/IDE
+.vscode/
+.idea/
+
+# build guide (internal commit-order doc, not for the repo)
+commit.md
+
+# internal Claude Code instructions, not for the repo
+CLAUDE.md
