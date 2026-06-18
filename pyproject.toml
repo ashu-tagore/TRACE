@@ -5,7 +5,7 @@ description     = "Temporal Reconstruction & Anomaly Cost Engine"
 requires-python = ">=3.11"
 
 dependencies = [
-    "yfinance==0.2.40",
+    "yfinance==0.2.66",
     "pandas==2.2.2",
     "numpy==1.26.4",
     "torch==2.3.0",
