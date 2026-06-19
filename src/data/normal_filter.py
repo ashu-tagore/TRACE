@@ -81,11 +81,15 @@ def filter_normal_data():
     returns  = pd.read_csv("data/processed/returns.csv",  index_col=0, parse_dates=True)
     features = pd.read_csv("data/processed/features.csv", index_col=0, parse_dates=True)
 
-    shared_index = returns.index.intersection(features.index)
-    returns      = returns.loc[shared_index]
-    features     = features.loc[shared_index]
-
+    # label on the full return history, not the truncated features.index —
+    # truncating first restarts the vol/corr rolling warm-up on top of the
+    # warm-up features.csv already paid, silently marking extra early days
+    # as "not stressed" when the full history was enough to evaluate them
     is_normal = label_normal_days(returns, config)
+
+    shared_index = is_normal.index.intersection(features.index)
+    features     = features.loc[shared_index]
+    is_normal    = is_normal.loc[shared_index]
 
     output_dir = Path("data/processed")
     features[is_normal].to_csv(output_dir / "features_normal.csv")
