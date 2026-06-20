@@ -25,6 +25,8 @@ dependencies = [
     "python-multipart==0.0.9",
     "pydantic-settings==2.2.1",
     "email-validator==2.1.1",
+    "setuptools>=69.0.0,<81",
+    "pip==24.0",
 ]
 
 [dependency-groups]
